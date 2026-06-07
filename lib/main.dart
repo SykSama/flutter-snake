@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fnake/src/sensors.g.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,8 +10,16 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(body: Center(child: Text('Hello World!'))),
+    return MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: StreamBuilder(
+            stream: accelerometerEventStream(),
+            builder: (context, snapshot) =>
+                Text(snapshot.data?.x.toString() ?? 'Not available'),
+          ),
+        ),
+      ),
     );
   }
 }
