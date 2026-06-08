@@ -1,0 +1,42 @@
+import 'dart:ui';
+
+import 'package:flame/components.dart';
+import 'package:flutter/material.dart';
+import 'package:fnake/modules/game/domain/models/game_config.dart';
+
+class BoardComponent extends PositionComponent {
+  BoardComponent({required this.config});
+
+  final GameConfig config;
+
+  final Paint _backgroundPaint = Paint()..color = const Color(0xFF101820);
+  final Paint _gridPaint = Paint()
+    ..color = const Color(0x1FFFFFFF)
+    ..strokeWidth = 1;
+
+  double cellSize = 0;
+
+  @override
+  void onGameResize(Vector2 size) {
+    super.onGameResize(size);
+    final boardSize = size.x < size.y ? size.x : size.y;
+    this.size = Vector2.all(boardSize);
+    position = Vector2((size.x - boardSize) / 2, (size.y - boardSize) / 2);
+    cellSize = boardSize / config.columns;
+  }
+
+  @override
+  void render(Canvas canvas) {
+    canvas.drawRect(size.toRect(), _backgroundPaint);
+
+    for (var x = 1; x < config.columns; x++) {
+      final offset = x * cellSize;
+      canvas.drawLine(Offset(offset, 0), Offset(offset, size.y), _gridPaint);
+    }
+
+    for (var y = 1; y < config.rows; y++) {
+      final offset = y * cellSize;
+      canvas.drawLine(Offset(0, offset), Offset(size.x, offset), _gridPaint);
+    }
+  }
+}
