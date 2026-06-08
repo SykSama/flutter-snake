@@ -1,3 +1,12 @@
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'game_config.g.dart';
+
+@riverpod
+GameConfig gameConfig(Ref ref) {
+  return const GameConfig();
+}
+
 /// Immutable configuration for a snake game session.
 class GameConfig {
   const GameConfig({
