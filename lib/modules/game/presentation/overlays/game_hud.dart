@@ -10,21 +10,21 @@ class GameHud extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
+    return const Padding(
+      padding: EdgeInsets.all(16),
       child: Column(
         children: [
           Row(
             children: [
-              const _ScorePillWatcher(),
-              const SizedBox(width: 8),
-              const BestScorePillWatcher(),
-              const Spacer(),
-              const _GameControlsWatcher(),
+              _ScorePillWatcher(),
+              SizedBox(width: 8),
+              BestScorePillWatcher(),
+              Spacer(),
+              _GameControlsWatcher(),
             ],
           ),
-          const Spacer(),
-          const _PhasePanelWatcher(),
+          Spacer(),
+          _PhasePanelWatcher(),
         ],
       ),
     );

@@ -11,11 +11,11 @@ class GameSessionState {
   final GamePhase phase;
 
   factory GameSessionState.initial() {
-    return GameSessionState(score: 0, phase: GamePhase.ready);
+    return const GameSessionState(score: 0, phase: GamePhase.ready);
   }
 
   factory GameSessionState.restart() {
-    return GameSessionState(score: 0, phase: GamePhase.running);
+    return const GameSessionState(score: 0, phase: GamePhase.running);
   }
 
   GameSessionState copyWith({int? score, GamePhase? phase}) {

@@ -4,5 +4,5 @@ import 'package:fnake/app/app.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(ProviderScope(child: const AppWidget()));
+  runApp(const ProviderScope(child: AppWidget()));
 }

@@ -11,12 +11,12 @@ class BestScorePillWatcher extends ConsumerWidget {
     final highScore$ = ref.watch(highScoreProvider);
 
     return switch (highScore$) {
-      AsyncLoading<int>() => Text('Skimmer effect ...'),
+      AsyncLoading<int>() => const Text('Skimmer effect ...'),
       AsyncData<int>(:final value) => ScorePill(
         label: 'Best Score',
         value: value,
       ),
-      AsyncError<int>() => Text('Error loading'),
+      AsyncError<int>() => const Text('Error loading'),
     };
   }
 }
