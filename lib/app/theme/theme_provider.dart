@@ -5,12 +5,12 @@ part 'theme_provider.g.dart';
 
 @Riverpod(keepAlive: true)
 class ThemeProvider extends _$ThemeProvider {
-  static final appThemes = [neonTheme, retroTheme, corporateTheme];
+  static final themes = [neonTheme, retroTheme, corporateTheme];
 
   @override
   AppTheme build() => neonTheme;
 
   void switchTheme(AppThemeName name) {
-    state = appThemes.firstWhere((theme) => theme.name == name);
+    state = themes.firstWhere((theme) => theme.name == name);
   }
 }

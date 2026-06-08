@@ -11,22 +11,61 @@ class AppTheme {
 }
 
 final neonTheme = AppTheme(
-  name: .neon,
+  name: AppThemeName.neon,
   themeData: ThemeData(
-    extensions: [const GameThemeExtension(snakeColor: Colors.blue)],
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: const Color(0xFF00FFCC),
+      brightness: Brightness.dark,
+    ),
+    extensions: [
+      const GameThemeExtension(
+        snakeHeadColor: Color(0xFF00FFCC),
+        snakeBodyColor: Color(0xFF00CC99),
+        foodColor: Color(0xFFFF006E),
+        boardColor: Color(0xFF101820),
+        gridLineColor: Color(0x1FFFFFFF),
+        gameBackgroundColor: Color(0xFF071013),
+      ),
+    ],
   ),
 );
 
 final retroTheme = AppTheme(
-  name: .retro,
+  name: AppThemeName.retro,
   themeData: ThemeData(
-    extensions: [const GameThemeExtension(snakeColor: Colors.blue)],
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: const Color(0xFF33FF33),
+      brightness: Brightness.dark,
+    ),
+    extensions: const [
+      GameThemeExtension(
+        snakeHeadColor: Color(0xFF33FF33),
+        snakeBodyColor: Color(0xFF00BB00),
+        foodColor: Color(0xFFFFB800),
+        boardColor: Color(0xFF0D1B0D),
+        gridLineColor: Color(0xFF1A331A),
+        gameBackgroundColor: Color(0xFF000000),
+      ),
+    ],
   ),
 );
 
 final corporateTheme = AppTheme(
-  name: .corporate,
+  name: AppThemeName.corporate,
   themeData: ThemeData(
-    extensions: [const GameThemeExtension(snakeColor: Colors.blue)],
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: const Color(0xFF1E40AF),
+      brightness: Brightness.light,
+    ),
+    extensions: const [
+      GameThemeExtension(
+        snakeHeadColor: Color(0xFF1E40AF),
+        snakeBodyColor: Color(0xFF3B82F6),
+        foodColor: Color(0xFFEF4444),
+        boardColor: Color(0xFFFFFFFF),
+        gridLineColor: Color(0xFFE2E8F0),
+        gameBackgroundColor: Color(0xFFF0F4F8),
+      ),
+    ],
   ),
 );

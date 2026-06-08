@@ -4,6 +4,7 @@ import 'package:fnake/app/widgets/score_pill.widget.dart';
 import 'package:fnake/modules/game/application/game_session.dart';
 import 'package:fnake/modules/game/domain/models/game_phase.dart';
 import 'package:fnake/modules/high_score/presentation/best_score_pill_watcher.dart';
+import 'package:fnake/modules/settings/presentation/theme_picker_sheet.dart';
 
 class GameHud extends StatelessWidget {
   const GameHud({super.key});
@@ -20,6 +21,8 @@ class GameHud extends StatelessWidget {
               SizedBox(width: 8),
               BestScorePillWatcher(),
               Spacer(),
+              _ThemePickerButton(),
+              SizedBox(width: 4),
               _GameControlsWatcher(),
             ],
           ),
@@ -27,6 +30,19 @@ class GameHud extends StatelessWidget {
           _PhasePanelWatcher(),
         ],
       ),
+    );
+  }
+}
+
+class _ThemePickerButton extends StatelessWidget {
+  const _ThemePickerButton();
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton.filledTonal(
+      onPressed: () => ThemePickerSheet.show(context),
+      icon: const Icon(Icons.palette_outlined),
+      tooltip: 'Change theme',
     );
   }
 }
