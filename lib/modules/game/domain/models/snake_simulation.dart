@@ -17,9 +17,16 @@ class SnakeStepResult {
 /// Call [step] at a fixed interval (driven by [GameConfig.movesPerSecond])
 /// and [queueDirection] whenever the player inputs a new direction.
 class SnakeSimulation {
-  SnakeSimulation({required this.config, Random? random})
-    : _random = random ?? Random() {
+  SnakeSimulation({
+    required this.config,
+    Random? random,
+    List<Cell>? initialBody,
+  }) : _random = random ?? Random() {
     reset();
+    if (initialBody != null) {
+      _body = List.of(initialBody);
+      _food = _randomEmptyCell();
+    }
   }
 
   final GameConfig config;

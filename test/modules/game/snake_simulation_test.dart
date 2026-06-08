@@ -1,8 +1,21 @@
+import 'dart:math';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fnake/modules/game/domain/models/cell.dart';
 import 'package:fnake/modules/game/domain/models/direction.dart';
 import 'package:fnake/modules/game/domain/models/game_config.dart';
 import 'package:fnake/modules/game/domain/models/snake_simulation.dart';
+
+// Always picks the last available empty cell so food lands at (19,19) on a
+// default 20×20 grid — reachable by the greedy right-then-down strategy.
+class _LastCellRandom implements Random {
+  @override
+  int nextInt(int max) => max - 1;
+  @override
+  double nextDouble() => 0;
+  @override
+  bool nextBool() => false;
+}
 
 void main() {
   group('SnakeSimulation', () {
@@ -46,10 +59,25 @@ void main() {
     });
 
     test('ends the game on self collision', () {
-      final simulation = SnakeSimulation(config: const GameConfig());
-      // Default head at (10,10) moving right. Turn: down, left, up — forms a
-      // U-loop. The final right turn drives the head into the body segment.
-      final moves = [Direction.down, Direction.left, Direction.up];
+      // 5-cell snake at (10,10). Loop: down×2, left, up forms a U without
+      // premature self-collision. The final right turn drives the head into
+      // (10,11) which is still in the non-tail body.
+      final simulation = SnakeSimulation(
+        config: const GameConfig(),
+        initialBody: [
+          const Cell(10, 10),
+          const Cell(9, 10),
+          const Cell(8, 10),
+          const Cell(7, 10),
+          const Cell(6, 10),
+        ],
+      );
+      final moves = [
+        Direction.down,
+        Direction.down,
+        Direction.left,
+        Direction.up,
+      ];
       for (final dir in moves) {
         simulation.queueDirection(dir);
         simulation.step();
@@ -61,7 +89,12 @@ void main() {
     });
 
     test('ateFood is true and body grows when reaching food', () {
-      final simulation = SnakeSimulation(config: const GameConfig());
+      // Food is deterministically placed at (19,19). The greedy right-then-down
+      // navigation reaches it without hitting walls or self.
+      final simulation = SnakeSimulation(
+        config: const GameConfig(),
+        random: _LastCellRandom(),
+      );
       final initialLength = simulation.body.length;
 
       SnakeStepResult result;
