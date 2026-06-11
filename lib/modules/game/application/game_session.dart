@@ -2,6 +2,7 @@ import 'package:fnake/modules/game/domain/models/game_phase.dart';
 import 'package:fnake/modules/high_score/data/high_score_repository_impl.dart';
 import 'package:fnake/modules/high_score/domain/high_score.dart';
 import 'package:fnake/modules/high_score/domain/use_cases/set_high_score_use_case.dart';
+import 'package:fnake/modules/high_score/presentation/providers/get_high_score_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'game_session.g.dart';
@@ -60,10 +61,12 @@ class GameSession extends _$GameSession {
   }
 
   Future<void> gameOver() async {
+    state = state.copyWith(phase: GamePhase.gameOver);
+
     await SetHighScoreUseCase(
       highScoreRepository: ref.read(highScoreRepositoryProvider),
     )(HighScore(score: state.score));
 
-    state = state.copyWith(phase: GamePhase.gameOver);
+    ref.invalidate(getHighScoreProvider);
   }
 }
