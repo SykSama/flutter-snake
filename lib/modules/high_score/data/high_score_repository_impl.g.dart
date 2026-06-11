@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'high_score.repository.dart';
+part of 'high_score_repository_impl.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -55,4 +55,4 @@ final class HighScoreRepositoryProvider
 }
 
 String _$highScoreRepositoryHash() =>
-    r'35b056dbafccaa8c000aadb42a697247fa1a775d';
+    r'7b74f3879e5ce940cc276073f754aeaf35900c58';

@@ -41,7 +41,7 @@ final class GameSessionProvider
   }
 }
 
-String _$gameSessionHash() => r'23be6b366fd04d67f7f4a1ba257600a372cdd2bb';
+String _$gameSessionHash() => r'37aefe68d3b82bd6a1e3248345a76bcb778ffeab';
 
 abstract class _$GameSession extends $Notifier<GameSessionState> {
   GameSessionState build();
